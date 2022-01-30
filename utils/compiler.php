@@ -72,7 +72,7 @@ function getlshash() {
 function compile() {
 	global $sep, $r4path, $jsPacker;
 
-	escreve('Updating codes...');
+	escreve('Updating codes...'. PHP_EOL);
 
 	if(PHP_OS_FAMILY == 'Windows') {
 		shell_exec('rmdir /s /q ".\public"');
@@ -80,8 +80,8 @@ function compile() {
 		echo shell_exec('Xcopy  /r /s /e /c /q /y "./src" "./public"');
 		shell_exec('mkdir "./public/_assets/r4/php"');
 		shell_exec('mkdir "./public/_assets/vendor"');
-		shell_exec('Xcopy  /r /s /e /c /q /y  "'. $r4path .'vendor\r4\php" "./public/_assets/r4/php"');
-		shell_exec('Xcopy /r /s /e /c /q /y "./vendor/vendor" "./public/_assets/vendor"');
+		echo shell_exec('Xcopy  /r /s /e /c /q /y  "'. $r4path .'vendor\r4\php" "./public/_assets/r4/php"');
+		echo shell_exec('Xcopy /r /s /e /c /q /y "./vendor/vendor" "./public/_assets/vendor"');
 	} else {
 		shell_exec('rm -rf ./public/*');
 		shell_exec('mkdir ./public/_assets');
