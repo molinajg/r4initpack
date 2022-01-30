@@ -38,8 +38,8 @@ if(!file_exists($r4path .'utils'. $sep .'initPack'. $sep .'content.zip')) {
 
 copy($r4path .'utils'. $sep .'initPack'. $sep .'content.zip', $syspath .'content.zip');
 chdir($syspath);
-shell_exec('unzip content.zip');
-unlink('content.zip');
+shell_exec($r4path .'utils'. $sep .'initPack'. $sep .'unzip.exe content.zip');
+// unlink('content.zip');
 
 echoc('Informe o nome (apelido) do sistema. Uma só palavra ['. $sysname .']:');
 $systemid = str_replace(' ', '', trim(stream_get_line(STDIN, 1024, PHP_EOL)));
