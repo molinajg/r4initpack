@@ -11,7 +11,11 @@ if(isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
 //Force https
 $http = 'https://';
 
-$priv = parse_ini_file('/etc/.r4priv_{systemid}');
+if(PHP_OS_FAMILY == 'Windows'){
+	$priv = parse_ini_file('c:/r4priv/.r4priv_{systemid}');
+}else {
+	$priv = parse_ini_file('/etc/.r4priv_{systemid}');
+}
 
 define('HTTP',       $http);
 
