@@ -20,6 +20,8 @@ if(empty($cfgstr)) {
 
 $cfg = json_decode($cfgstr, 1);
 
+print_r($cfg);
+
 $jsPacker       = $cfg['jsPacker'] ?? '';
 $monitorFolders = $cfg['foldersToMonitor'];
 
@@ -33,6 +35,8 @@ if((count($argv) > 1 && $argv[1] == 'monitor') || (isset($monitor) && $monitor))
 	while(true) {
 		$ls = getlshash();
 		if($past != $ls) {
+			escreve('Changes detected...');
+			sleep(0.5);
 			compile();
 			escreve('Monitoring...');
 			$past = getlshash();
@@ -72,7 +76,8 @@ function getlshash() {
 function compile() {
 	global $sep, $r4path, $jsPacker;
 
-	escreve('Updating codes...'. PHP_EOL);
+	escreve('Updating codes....'.PHP_EOL);
+	//escreve('R4: '.$r4path);
 
 	if(PHP_OS_FAMILY == 'Windows') {
 		shell_exec('rmdir /s /q ".\public"');
@@ -80,7 +85,7 @@ function compile() {
 		echo shell_exec('Xcopy  /r /s /e /c /q /y "./src" "./public"');
 		shell_exec('mkdir "./public/_assets/r4/php"');
 		shell_exec('mkdir "./public/_assets/vendor"');
-		echo shell_exec('Xcopy  /r /s /e /c /q /y  "'. $r4path .'vendor\r4\php" "./public/_assets/r4/php"');
+		echo shell_exec('Xcopy /r /s /e /c /q /y  "'. $r4path .'php" "./public/_assets/r4/php"');
 		echo shell_exec('Xcopy /r /s /e /c /q /y "./vendor/vendor" "./public/_assets/vendor"');
 	} else {
 		shell_exec('rm -rf ./public/*');

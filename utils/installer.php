@@ -38,8 +38,7 @@ if(!file_exists($r4path .'utils'. $sep .'initPack'. $sep .'content.zip')) {
 
 copy($r4path .'utils'. $sep .'initPack'. $sep .'content.zip', $syspath .'content.zip');
 chdir($syspath);
-echoc('Unzip file "content.zip"...');
-shell_exec($r4path .'utils'. $sep .'initPack'. $sep .'unzip.exe content.zip');
+shell_exec('unzip content.zip');
 unlink('content.zip');
 
 echoc('Informe o nome (apelido) do sistema. Uma só palavra ['. $sysname .']:');
@@ -97,16 +96,10 @@ chdir($syspath);
 
 echoc();
 
-if(PHP_OS_FAMILY == 'Windows'){
-	// $priv = parse_ini_file('c:/r4priv/.r4priv_{systemid}');
-	// echoc('No caso de Windows, coloque o arquivo em uma pasta segura e mude o caminho em src'. $sep .'config.inc.php');
-	echoc('move /y '. $syspath .'.r4priv_'. $systemid .' c:'. $sep .'r4priv'. $sep .''.'.r4priv_'. $systemid);
-	echo shell_exec('move /y '. $syspath .'.r4priv_'. $systemid .' c:'. $sep .'r4priv'. $sep .''.'.r4priv_'. $systemid);
-}else {
-	echoc('Informe a senha do sudo da máquina ou mova manualmente privado depois.');
-	echoc('sudo mv '. $syspath .'.r4priv_'. $systemid .' '. $sep .'etc'. $sep .'.r4priv_'. $systemid);
-	shell_exec('sudo mv '. $syspath .'.r4priv_'. $systemid .' '. $sep .'etc'. $sep .'.r4priv_'. $systemid);
-}
+echoc('Informe a senha do sudo da máquina ou mova manualmente privado depois.');
+echoc('No caso de Windows, coloque o arquivo em uma pasta segura e mude o caminho em src'. $sep .'config.inc.php');
+echoc('sudo mv '. $syspath .'.r4priv_'. $systemid .' '. $sep .'etc'. $sep .'.r4priv_'. $systemid);
+shell_exec('sudo mv '. $syspath .'.r4priv_'. $systemid .' '. $sep .'etc'. $sep .'.r4priv_'. $systemid);
 
 echoc();
 
